@@ -1,4 +1,5 @@
 #include <Windows.h>
+#include <string>
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
@@ -89,7 +90,12 @@ bool MainWindow::nativeEvent(const QByteArray &eventType, void *message, long *r
     MSG *msg = reinterpret_cast<MSG*>(message);
     if(msg->message == WM_HOTKEY)
     {
-        std::string str = stringHotKeys["alt1"];
+        // construct the stringHotKeys map by taking the wParam value of the message, which will be
+        // the key pressed not including modifiers (alt, ctrl, etc.), then prepend "alt" before it.
+        std::string index = std::to_string(msg->wParam);
+        index.insert(0, "alt");
+        std::string str = stringHotKeys[index];
+
         Clipboard clipboard;
         clipboard.copy_to_clipboard(str);
         *result = 0;

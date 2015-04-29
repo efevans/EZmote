@@ -28,6 +28,8 @@ private:
 
     // setup the default connections of the application
     void makeConnections();
+    void registerHotkeys();
+    std::string translateKeyToString();
 
 private slots:
     // updates the stringHotKeys element of signal sender's name with str
