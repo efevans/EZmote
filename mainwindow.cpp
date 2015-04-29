@@ -7,6 +7,13 @@
 #define ALT1 1
 #define ALT2 2
 #define ALT3 3
+#define ALT4 4
+#define ALT5 5
+#define ALT6 6
+#define ALT7 7
+#define ALT8 8
+#define ALT9 9
+#define ALT0 10
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -15,8 +22,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     this->makeConnections();
-
-    RegisterHotKey(reinterpret_cast<HWND>(this->winId()), ALT1, MOD_ALT | MOD_NOREPEAT, 0x31);
+    this->registerHotkeys();
 }
 
 MainWindow::~MainWindow()
@@ -25,6 +31,7 @@ MainWindow::~MainWindow()
     UnregisterHotKey(reinterpret_cast<HWND>(this->winId()), ALT1);
 }
 
+// set up Qt connections
 void MainWindow::makeConnections()
 {
     connect(ui->alt1, SIGNAL(textEdited(QString)),
@@ -35,8 +42,45 @@ void MainWindow::makeConnections()
 
     connect(ui->alt3, SIGNAL(textEdited(QString)),
             this, SLOT(on_keylineedit_edited(QString)));
+
+    connect(ui->alt4, SIGNAL(textEdited(QString)),
+            this, SLOT(on_keylineedit_edited(QString)));
+
+    connect(ui->alt5, SIGNAL(textEdited(QString)),
+            this, SLOT(on_keylineedit_edited(QString)));
+
+    connect(ui->alt6, SIGNAL(textEdited(QString)),
+            this, SLOT(on_keylineedit_edited(QString)));
+
+    connect(ui->alt7, SIGNAL(textEdited(QString)),
+            this, SLOT(on_keylineedit_edited(QString)));
+
+    connect(ui->alt8, SIGNAL(textEdited(QString)),
+            this, SLOT(on_keylineedit_edited(QString)));
+
+    connect(ui->alt9, SIGNAL(textEdited(QString)),
+            this, SLOT(on_keylineedit_edited(QString)));
+
+    connect(ui->alt0, SIGNAL(textEdited(QString)),
+            this, SLOT(on_keylineedit_edited(QString)));
 }
 
+// register the global hotkeys
+void MainWindow::registerHotkeys()
+{
+    RegisterHotKey(reinterpret_cast<HWND>(this->winId()), ALT1, MOD_ALT | MOD_NOREPEAT, 0x31);
+    RegisterHotKey(reinterpret_cast<HWND>(this->winId()), ALT2, MOD_ALT | MOD_NOREPEAT, 0x32);
+    RegisterHotKey(reinterpret_cast<HWND>(this->winId()), ALT3, MOD_ALT | MOD_NOREPEAT, 0x33);
+    RegisterHotKey(reinterpret_cast<HWND>(this->winId()), ALT4, MOD_ALT | MOD_NOREPEAT, 0x34);
+    RegisterHotKey(reinterpret_cast<HWND>(this->winId()), ALT5, MOD_ALT | MOD_NOREPEAT, 0x35);
+    RegisterHotKey(reinterpret_cast<HWND>(this->winId()), ALT6, MOD_ALT | MOD_NOREPEAT, 0x36);
+    RegisterHotKey(reinterpret_cast<HWND>(this->winId()), ALT7, MOD_ALT | MOD_NOREPEAT, 0x37);
+    RegisterHotKey(reinterpret_cast<HWND>(this->winId()), ALT8, MOD_ALT | MOD_NOREPEAT, 0x38);
+    RegisterHotKey(reinterpret_cast<HWND>(this->winId()), ALT9, MOD_ALT | MOD_NOREPEAT, 0x39);
+    RegisterHotKey(reinterpret_cast<HWND>(this->winId()), ALT0, MOD_ALT | MOD_NOREPEAT, 0x30);
+}
+
+// overriden function to receive and respond to messages about a register global hotkey being used
 bool MainWindow::nativeEvent(const QByteArray &eventType, void *message, long *result)
 {
     Q_UNUSED(eventType);
