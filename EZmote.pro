@@ -16,11 +16,11 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     keylineedit.cpp \
     Clipboard.cpp \
-    hotkeysaver.cpp
+    stringmanager.cpp
 
 HEADERS  += mainwindow.h \
     keylineedit.h \
     Clipboard.h \
-    hotkeysaver.h
+    stringmanager.h
 
 FORMS    += mainwindow.ui

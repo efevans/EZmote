@@ -32,7 +32,6 @@ MainWindow::~MainWindow()
     this->unregisterHotKeys();
 }
 
-// set up Qt connections
 void MainWindow::makeConnections()
 {
     connect(ui->alt1, SIGNAL(textEdited(QString)),
@@ -66,7 +65,6 @@ void MainWindow::makeConnections()
             this, SLOT(on_keylineedit_edited(QString)));
 }
 
-// register the global hotkeys
 void MainWindow::registerHotKeys()
 {
     RegisterHotKey(reinterpret_cast<HWND>(this->winId()), ALT1, MOD_ALT | MOD_NOREPEAT, 0x31);
@@ -81,7 +79,6 @@ void MainWindow::registerHotKeys()
     RegisterHotKey(reinterpret_cast<HWND>(this->winId()), ALT0, MOD_ALT | MOD_NOREPEAT, 0x30);
 }
 
-// unregister global hotkeys
 void MainWindow::unregisterHotKeys()
 {
     UnregisterHotKey(reinterpret_cast<HWND>(this->winId()), ALT1);
@@ -109,7 +106,7 @@ bool MainWindow::nativeEvent(const QByteArray &eventType, void *message, long *r
         // the key pressed not including modifiers (alt, ctrl, etc.), then prepend "alt" before it.
         std::string index = std::to_string(msg->wParam);
         index.insert(0, "alt");
-        std::string str = stringHotKeys[index];
+        std::string str = stringManager[index];
 
         Clipboard clipboard;
         clipboard.copy_to_clipboard(str);
@@ -131,5 +128,5 @@ void MainWindow::on_keylineedit_edited(QString str)
     std::string dataStr = str.toLocal8Bit().constData();
 
     // input into map<std::string, std::string>
-    stringHotKeys[senderName] = dataStr;
+    stringManager[senderName] = dataStr;
 }

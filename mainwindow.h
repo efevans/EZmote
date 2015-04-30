@@ -2,13 +2,14 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <map>
+#include "stringmanager.h"
 
 namespace Ui {
 class MainWindow;
 }
 
 class KeyLineEdit;
+class StringManager;
 
 class MainWindow : public QMainWindow
 {
@@ -24,13 +25,14 @@ protected:
 
 private:
     Ui::MainWindow *ui;
-    std::map<std::string, std::string> stringHotKeys;
+    StringManager stringManager;
 
     // setup the default connections of the application
     void makeConnections();
+    // register the global hotkeys
     void registerHotKeys();
+    // unregister global hotkeys
     void unregisterHotKeys();
-    std::string translateKeyToString();
 
 private slots:
     // updates the stringHotKeys element of signal sender's name with str
