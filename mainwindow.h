@@ -28,7 +28,8 @@ private:
 
     // setup the default connections of the application
     void makeConnections();
-    void registerHotkeys();
+    void registerHotKeys();
+    void unregisterHotKeys();
     std::string translateKeyToString();
 
 private slots:

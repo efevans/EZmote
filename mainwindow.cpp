@@ -23,13 +23,13 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     this->makeConnections();
-    this->registerHotkeys();
+    this->registerHotKeys();
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
-    UnregisterHotKey(reinterpret_cast<HWND>(this->winId()), ALT1);
+    this->unregisterHotKeys();
 }
 
 // set up Qt connections
@@ -67,7 +67,7 @@ void MainWindow::makeConnections()
 }
 
 // register the global hotkeys
-void MainWindow::registerHotkeys()
+void MainWindow::registerHotKeys()
 {
     RegisterHotKey(reinterpret_cast<HWND>(this->winId()), ALT1, MOD_ALT | MOD_NOREPEAT, 0x31);
     RegisterHotKey(reinterpret_cast<HWND>(this->winId()), ALT2, MOD_ALT | MOD_NOREPEAT, 0x32);
@@ -79,6 +79,21 @@ void MainWindow::registerHotkeys()
     RegisterHotKey(reinterpret_cast<HWND>(this->winId()), ALT8, MOD_ALT | MOD_NOREPEAT, 0x38);
     RegisterHotKey(reinterpret_cast<HWND>(this->winId()), ALT9, MOD_ALT | MOD_NOREPEAT, 0x39);
     RegisterHotKey(reinterpret_cast<HWND>(this->winId()), ALT0, MOD_ALT | MOD_NOREPEAT, 0x30);
+}
+
+// unregister global hotkeys
+void MainWindow::unregisterHotKeys()
+{
+    UnregisterHotKey(reinterpret_cast<HWND>(this->winId()), ALT1);
+    UnregisterHotKey(reinterpret_cast<HWND>(this->winId()), ALT2);
+    UnregisterHotKey(reinterpret_cast<HWND>(this->winId()), ALT3);
+    UnregisterHotKey(reinterpret_cast<HWND>(this->winId()), ALT4);
+    UnregisterHotKey(reinterpret_cast<HWND>(this->winId()), ALT5);
+    UnregisterHotKey(reinterpret_cast<HWND>(this->winId()), ALT6);
+    UnregisterHotKey(reinterpret_cast<HWND>(this->winId()), ALT7);
+    UnregisterHotKey(reinterpret_cast<HWND>(this->winId()), ALT8);
+    UnregisterHotKey(reinterpret_cast<HWND>(this->winId()), ALT9);
+    UnregisterHotKey(reinterpret_cast<HWND>(this->winId()), ALT0);
 }
 
 // overriden function to receive and respond to messages about a register global hotkey being used

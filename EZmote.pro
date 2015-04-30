@@ -15,10 +15,12 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     keylineedit.cpp \
-    Clipboard.cpp
+    Clipboard.cpp \
+    hotkeysaver.cpp
 
 HEADERS  += mainwindow.h \
     keylineedit.h \
-    Clipboard.h
+    Clipboard.h \
+    hotkeysaver.h
 
 FORMS    += mainwindow.ui
